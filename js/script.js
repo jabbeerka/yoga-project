@@ -220,5 +220,43 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+//calc
+    let persons = document.querySelectorAll('.counter-block-input')[0],
+        appDays = document.querySelectorAll('.counter-block-input')[1],
+        totalValue = document.getElementById('total'),
+        selectCity = document.getElementById('select'),
+        personsSum = 0,
+        daysSum = 0,
+        total = 0;
 
+        
+        totalValue.innerHTML = "0";
+        
+        function correctSum() {
+            if (persons.value == '' || appDays.value == '') {
+                totalValue.innerHTML = "0";
+            } else {
+                totalValue.innerHTML = total * selectCity.options[selectCity.selectedIndex].value;
+            }
+        } 
+        persons.addEventListener('change', function(){
+            personsSum = +this.value;
+            total = (daysSum + personsSum)*4000;
+            if (appDays.value == "" || persons.value == "") {
+                totalValue.innerHTML = '0';
+            } else {
+                totalValue.innerHTML = total;
+            }
+        });
+        appDays.addEventListener('change', function(){
+            daysSum = +this.value;
+            total = (personsSum + daysSum)*4000;
+            if (appDays.value == "" || persons.value == "") {
+                totalValue.innerHTML = '0';
+            } else {
+                totalValue.innerHTML = total;
+            }
+        });
+
+        selectCity.addEventListener('change', correctSum);
 });
